@@ -5,16 +5,18 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
+ * @ORM\Table(name="commentaires")
  * @ORM\Entity(repositoryClass="App\Repository\CommentairesRepository")
  */
-class Commentaires
+class Commentaires extends AbstractController
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id",type="integer")
      */
     private $id;
 
@@ -29,12 +31,12 @@ class Commentaires
     private $idArticle;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="commentaire",type="text")
      */
     private $commentaire;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="date_post",type="datetime")
      */
     private $datePost;
 

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container body">
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-8 text-center mt-5">
+                <h2 class="h3 mb-3 font-weight-normal">Inscription</h2>
+                {{ form_start(formAjout) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formAjout) }}
+                    <span class="text-danger">{{ form_errors(formAjout.pseudo) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.email) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.nom) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.prenom) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.mdp) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.sexe) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.naissance) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.ville) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjout.photo) }}</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.pseudo) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.email) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.nom) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.prenom) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.mdp) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.sexe) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.naissance) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.ville) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAjout.photo) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_row(formAjout.save) }}
+                        {{ form_end(formAjout) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

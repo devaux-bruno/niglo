@@ -2,72 +2,136 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+
 
 /**
+ * @ORM\Table(name="utilisateur")
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  */
-class Utilisateur
+class Utilisateur implements UserInterface, \Serializable
 {
+
+    /*
+     * Permet de définir un tableau de role, il peut y en avoir plusieurs
+     */
+    public function getRoles() : array
+    {
+        if($this->getStatus() == 'superadmin'){
+        return [
+            'ROLE_SUPERADMIN'
+        ];
+        }
+        if ($this->getStatus() == 'admin'){
+            return [
+                'ROLE_ADMIN'
+            ];
+        }
+        else{
+            return [
+                'ROLE_MEMBER'
+            ];
+        }
+    }
+
+
+    /*
+     * la fonction password permet de retourner le mdp de la bdd
+     */
+    public function getPassword() :?string
+    {
+        return $this->mdp;
+    }
+
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+
+    /*
+     * retour l'adresse mail de la bdd
+     */
+    public function getUsername() :string
+    {
+        return $this->email;
+    }
+
+
+    /*
+     * permet d'éviter les donnée sensible comme les mdp
+     */
+    public function eraseCredentials()
+    {
+
+    }
+
+
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id",type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(name="status",type="string", length=60)
      */
     private $status;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(name="pseudo",type="string", length=60)
      */
     private $pseudo;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(name="nom",type="string", length=60)
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(name="prenom",type="string", length=60)
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(name="email",type="string", length=60)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="mdp",type="string", length=255)
      */
     private $mdp;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="date_naissance", type="date", nullable=true)
      */
     private $naissance;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(name="ville",type="string", length=60)
      */
     private $ville;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="photo",type="string", length=255)
      */
     private $photo;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="sexe",type="integer")
      */
     private $sexe;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @var DateTime
+     * @ORM\Column(name="date_inscription",type="datetime")
      */
     private $dateInscription;
 
@@ -89,10 +153,6 @@ class Utilisateur
         return $this;
     }
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $dateNaissance;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="ServiceUtilisateur")
@@ -102,33 +162,15 @@ class Utilisateur
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Articles", inversedBy="idUtilisateur")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $UtilisateurArticle;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Commentaires", inversedBy="idUtilisateur")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $UtilisateurCommentaires;
-
-    /**
-     * @return mixed
-     */
-    public function getDateNaissance()
-    {
-        return $this->dateNaissance;
-    }
-
-    /**
-     * @param mixed $dateNaissance
-     * @return Utilisateur
-     */
-    public function setDateNaissance($dateNaissance)
-    {
-        $this->dateNaissance = $dateNaissance;
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -225,12 +267,19 @@ class Utilisateur
         return $this;
     }
 
-    public function getNaissance(): ?string
+    /**
+     * @return DateTime
+     */
+    public function getNaissance(): ?DateTime
     {
         return $this->naissance;
     }
 
-    public function setNaissance(string $naissance): self
+    /**
+     * @param DateTime $naissance
+     * @return Utilisateur
+     */
+    public function setNaissance(DateTime $naissance): Utilisateur
     {
         $this->naissance = $naissance;
 
@@ -302,4 +351,19 @@ class Utilisateur
         return $this;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function unserialize($serialized)
+    {
+        // TODO: Implement unserialize() method.
+    }
 }

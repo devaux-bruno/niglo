@@ -2,11 +2,85 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="site officiel des camions écoles de la région de Lyon, ce site a vocation de laisser une trace de l'activité des antennes scolaires mobiles">
+        <meta name="author" content="Devaux Bruno">
+        <title>{% block title %}Niglo- ASET du Rhône{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    {% block nav %}
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h1 class="my-0 mr-md-auto font-weight-normal mt-2"><img src="{{ asset('asset/img/logo.gif') }}" alt="Niglo Camion"></h1>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="#">Features</a>
+            <a class="p-2 text-dark" href="#">Enterprise</a>
+            <a class="p-2 text-dark" href="#">Support</a>
+            <a class="p-2 text-dark" href="#">Pricing</a>
+        </nav>
+            {% if is_granted('ROLE_SUPERADMIN') %}
+                <li class="nav-item-icon dropdown">
+                    <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="icon_nav" src="{{ asset('asset/img/profil/') }}" ></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="#">Mon profil</a>
+                        <a class="dropdown-item" href="#">Écrire un Article</a>
+                        <a class="dropdown-item" href="#">Gestion des Membres</a>
+                        <a class="dropdown-item" href="#">Gestion des Articles</a>
+                        <a class="dropdown-item" href="#">Gestion des Services</a>
+                        <a class="dropdown-item" href="#">Gestion des Commentaires</a>
+                        <a class="btn btn-outline-light" href="{{ path('app_logout') }}">Deconnexion</a>
+                    </div>
+                </li>
+                {% elseif is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item-icon dropdown">
+                        <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="icon_nav" src="{{ asset('asset/img/cogs-solid.svg') }}" ></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <a class="dropdown-item" href="#">Mon profil</a>
+                            <a class="dropdown-item" href="#">Écrire un Article</a>
+                            <a class="dropdown-item" href="#">Gestion des Membres</a>
+                            <a class="dropdown-item" href="#">Gestion des Articles</a>
+                            <a class="dropdown-item" href="#">Gestion des Commentaires</a>
+                            <a class="btn btn-outline-light" href="{{ path('app_logout') }}">Deconnexion</a>
+                        </div>
+                    </li>
+            {% elseif is_granted('ROLE_MEMBER') %}
+                <li class="nav-item-icon dropdown">
+                    <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="icon_nav" src="{{ asset('asset/img/cogs-solid.svg') }}" ></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="#">Mon profil</a>
+                        <a class="btn btn-outline-light" href="{{ path('app_logout') }}">Deconnexion</a>
+                    </div>
+                </li>
+            {% else %}
+                <a class="btn btn-outline-dark mx-1" href="{{ path('app_login') }}">Connexion</a>
+                <a class="btn btn-outline-dark" href="{{ path('inscription') }}">Inscription</a>
+            {% endif %}
+    </div>
+    {% endblock %}
+    {% for message in app.flashes('success') %}
+        <div class="container">
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="container">
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+        {% block body %}
+
+        {% endblock %}
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        {% endblock %}
     </body>
 </html>
+

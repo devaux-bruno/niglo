@@ -5,36 +5,38 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
+ * @ORM\Table(name="articles")
  * @ORM\Entity(repositoryClass="App\Repository\ArticlesRepository")
  */
-class Articles
+class Articles extends AbstractController
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id",type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(name="titre",type="string", length=60)
      */
     private $titre;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="description_courte",type="string", length=255)
      */
     private $descriptionCourte;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="texte",type="text")
      */
     private $texte;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="image_principale",type="string", length=255)
      */
     private $imagePrincipale;
 
@@ -49,7 +51,7 @@ class Articles
     private $idUtilisateur;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="date_publication",type="datetime")
      */
     private $datePublication;
 

@@ -3,31 +3,33 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
+ * @ORM\Table(name="service")
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
  */
-class Service
+class Service extends AbstractController
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id",type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="titre",type="string", length=255)
      */
     private $Titre;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="description",type="text")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="date_creation",type="datetime")
      */
     private $dateCreation;
 
