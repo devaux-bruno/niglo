@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Modifier mon profil</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                {{ form_start(formUserEdit) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formUserEdit) }}
+                    <span class="text-danger">{{ form_errors(formUserEdit.pseudo) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.nom) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.prenom) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.naissance) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.ville) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.sexe) }}</span>
+                    <span class="text-danger">{{ form_errors(formUserEdit.photo) }}</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.pseudo) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.naissance) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.prenom) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.nom) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.ville) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formUserEdit.sexe) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        {{ form_row(formUserEdit.photo) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+                        {% if app.user.photo is defined %}
+                            Photo de profil actuel:
+                            <img class="iconNav" alt="ancienne photo de profil" src="{{ asset('asset/img/profil/') }}{{ app.user.photo }}">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_rest(formUserEdit) }}
+                        {{ form_end(formUserEdit) }}
+                        <a class="btn btn-secondary mt-2" href="{{ path('profil_index') }}">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

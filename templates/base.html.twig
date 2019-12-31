@@ -13,7 +13,7 @@
     </head>
     <body>
     {% block nav %}
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow">
         <h1 class="my-0 mr-md-auto font-weight-normal mt-2"><img src="{{ asset('asset/img/logo.gif') }}" alt="Niglo Camion"></h1>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="#">Features</a>
@@ -30,9 +30,9 @@
                         <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/user-cirle-regular.svg') }}" alt="image profil vide"></a>
                     {% endif %}
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="#">Mon profil</a>
+                        <a class="dropdown-item" href="{{ path('profil_index') }}">Mon profil</a>
                         <a class="dropdown-item" href="#">Écrire un Article</a>
-                        <a class="dropdown-item" href="#">Gestion des Membres</a>
+                        <a class="dropdown-item" href="{{ path('user_index') }}">Gestion des Membres</a>
                         <a class="dropdown-item" href="#">Gestion des Articles</a>
                         <a class="dropdown-item" href="#">Gestion des Services</a>
                         <a class="dropdown-item" href="#">Gestion des Commentaires</a>
@@ -91,7 +91,7 @@
 
         {% endblock %}
     {% block footer %}
-        <footer class="my-md-5 border-top">
+        <footer class="mt-5 border-top">
             <div class="row justify-content-center mt-3 footer">
                 <div class="col-12 col-sm-12 col-md-4 justify-content-center mt-3 mb-4">
                     <p class="contact">

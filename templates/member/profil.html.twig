@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="text-center mt-5 mb-3 mt-2">Mon compte</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 text-center">
+                {% if app.user.photo is empty %}
+                    <img class="pictureProfil mt-2 mb-3" src="{{ asset('asset/img/user-cirle-regular.svg') }}" alt="nopic">
+                {% else %}
+                    <img class="pictureProfil mt-2 mb-3" src="{{ asset('asset/img/profil/') }}{{ app.user.photo }}" alt="profil picture">
+                {% endif %}
+                <p>Inscrit depuis le {{ app.user.dateInscription | date('d/m/Y à H:m:s') }}</p>
+                <p>
+                    <a class="btn btn-primary mt-2" href="{{ path('user_edit', {'id' : app.user.id })  }}">Modifier votre profil</a>
+                    <a class="btn btn-primary mt-2" href="#">Modifier mot de passe</a>
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 profilDesc">
+                <p><span class="spanProfil">Pseudo :</span> {{ app.user.pseudo  }}</p>
+                <p><span class="spanProfil">Email :</span> {{ app.user.emailUtilisateur }}</p>
+                <p><span class="spanProfil">Statut :</span> {{ app.user.status |capitalize }}</p>
+                {% if  app.user.prenom is empty %}
+                    <p><span class="spanProfil">Prénom :</span> non renseigné</p>
+                {% else %}
+                    <p><span class="spanProfil">Prénom :</span> {{ app.user.prenom |capitalize }}</p>
+                {% endif %}
+                {% if  app.user.nom is empty %}
+                    <p><span class="spanProfil">Nom :</span> non renseigné</p>
+                {% else %}
+                    <p><span class="spanProfil">Nom :</span> {{ app.user.nom }}</p>
+                {% endif %}
+                <p><span class="spanProfil">Date de naissance :</span> {{ app.user.naissance |date('d/m/Y') }}</p>
+                {% if  app.user.sexe == 0 %}
+                    <p><span class="spanProfil">sexe :</span> Homme</p>
+                {% else %}
+                    <p><span class="spanProfil">sexe :</span> Femme</p>
+                {% endif %}
+                {% if  app.user.ville is empty %}
+                    <p><span class="spanProfil">Ville :</span> non renseigné</p>
+                {% else %}
+                    <p><span class="spanProfil">Ville :</span> {{ app.user.ville }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

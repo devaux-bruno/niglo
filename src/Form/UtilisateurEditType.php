@@ -8,15 +8,13 @@ use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UtilisateurType extends AbstractType
+class UtilisateurEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $formBuilder, array $options)
     {
@@ -37,18 +35,6 @@ class UtilisateurType extends AbstractType
             ])
             ->add('prenom', TextType::class, [
                 'label' => 'Votre Prénom : ',
-                'attr' => [
-                    'class' => "form-control"
-                ],
-            ])
-            ->add('email', EmailType::class, [
-                'label' => 'Votre adresse mail : ',
-                'attr' => [
-                    'class' => "form-control"
-                ],
-            ])
-            ->add('mdp', PasswordType::class , [
-                'label' => 'Votre Mot de passe :',
                 'attr' => [
                     'class' => "form-control"
                 ],

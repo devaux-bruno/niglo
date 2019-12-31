@@ -3,12 +3,27 @@
 *************************************************************/
 .bd-placeholder-img {font-size: 1.125rem; text-anchor: middle; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
 svg{height: 50px;}
+.nav-item-icon{list-style: none}
+.dropdown-menu{transform: translate3d(-125px, 80px, 0px) !important;}
+td{vertical-align: middle !important;}
 
 /************************************************************
 *******************     Navigation     **********************
 *************************************************************/
-.iconNav {height: 100px;}
+.iconNav {height: 80px;}
+.shadow{box-shadow: 0 .85rem .5rem rgba(255,115,50,.075)!important;}
 
+/************************************************************
+*******************        Profil      **********************
+*************************************************************/
+.spanProfil{font-weight: 600; }
+.pictureProfil {max-height: 300px;}
+
+/************************************************************
+*******************     Espace Admin     ********************
+*************************************************************/
+.tabAcion{width:250px;}
+.logoLanguages{max-height: 50px;margin-left: 10px;margin-right: 10px;}
 
 
 /************************************************************
@@ -20,7 +35,7 @@ svg{height: 50px;}
 .logoSociaux{height: 40px;}
 .gridCenter{display: grid; text-align: center}
 .footer{width: 100%;}
-
+.border-top {box-shadow: -0 -0.85rem 0.5rem rgba(255,115,50,.075)!important; -moz-border-radius-topleft: 25px;-moz-border-radius-topright: 25px}
 
 /****************************************************************************************************************************
 ***************************************************     Responsive     *********************************************************

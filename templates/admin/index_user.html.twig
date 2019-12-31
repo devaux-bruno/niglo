@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Gestion des membres</h1>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="#">Ajouter un membre</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Id</th>
+                    <th>Pseudo / Email <br> Status</th>
+                    <th>Prénom / Nom <br> Date Naissance</th>
+                    <th> Sexe/Ville <br> Date inscription</th>
+                    <th>Photo</th>
+                    <th class="tabAcion">Action</th>
+                </tr>
+                <div id="accordion">
+                    {% for membre in resultatedit %}
+                        <tr>
+                            <td>{{ membre.id }}</td>
+                            <td>
+                                {{ membre.pseudo }}
+                                <br>
+                                {{ membre.emailUtilisateur }}
+                                <br>
+                                {{ membre.status }}
+                            </td>
+                            <td>
+                                {{ membre.prenom }}
+                                <br>
+                                {{ membre.nom }}
+                                <br>
+                                {{ membre.naissance |date('d/m/Y') }}
+                            </td>
+                            <td>
+                                {% if membre.sexe == 0 %}
+                                    Homme
+                                {% else %}
+                                    Femme
+                                {% endif %}
+                                <br>
+                                {{ membre.ville }}
+                                <br>
+                                {{ membre.dateInscription |date('d/m/Y H:m:s') }}
+                            </td>
+                            <td>
+                                {% if member.photo is defined %}
+                                <img class="logoLanguages" src="{{ asset('asset/img/profil/') }}{{ membre.photo }}" alt="picture {{ membre.pseudo }}">
+                                {% else %}
+                                    <img class="logoLanguages" src="{{ asset('asset/img/user-cirle-regular.svg') }}" alt="no picture">
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="btn btn-primary"
+                                   href="#">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="#">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}
