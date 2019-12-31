@@ -12,64 +12,90 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="utilisateur")
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  */
-class Utilisateur implements UserInterface, \Serializable
+class Utilisateur implements UserInterface
 {
 
-    /*
-     * Permet de définir un tableau de role, il peut y en avoir plusieurs
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return ['ROLE_USER'];
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
      */
-    public function getRoles() : array
+    public function getRoles()
     {
         if($this->getStatus() == 'superadmin'){
-        return [
-            'ROLE_SUPERADMIN'
-        ];
+            return [
+                'ROLE_SUPERADMIN'
+            ];
         }
         if ($this->getStatus() == 'admin'){
             return [
                 'ROLE_ADMIN'
             ];
         }
-        else{
+        if($this->getStatus() == 'member'){
             return [
                 'ROLE_MEMBER'
             ];
         }
+        else{
+            return ['IS_AUTHENTICATED_ANONYMOUSLY'];
+        }
     }
 
-
-    /*
-     * la fonction password permet de retourner le mdp de la bdd
+    /**
+     * Returns the password used to authenticate the user.
+     *
+     * This should be the encoded password. On authentication, a plain-text
+     * password will be salted, encoded, and then compared to this value.
+     *
+     * @return string|null The encoded password if any
      */
-    public function getPassword() :?string
+    public function getPassword()
     {
         return $this->mdp;
     }
 
-
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
     public function getSalt()
     {
         return null;
     }
 
-
-    /*
-     * retour l'adresse mail de la bdd
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
      */
-    public function getUsername() :string
+    public function getUsername()
     {
-        return $this->email;
+        return $this->emailUtilisateur;
     }
 
-
-    /*
-     * permet d'éviter les donnée sensible comme les mdp
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
      */
     public function eraseCredentials()
     {
-
+        // TODO: Implement eraseCredentials() method.
     }
-
 
 
     /**
@@ -102,7 +128,7 @@ class Utilisateur implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="email",type="string", length=60)
      */
-    private $email;
+    private $emailUtilisateur;
 
     /**
      * @ORM\Column(name="mdp",type="string", length=255)
@@ -243,14 +269,14 @@ class Utilisateur implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmailUtilisateur(): ?string
     {
-        return $this->email;
+        return $this->emailUtilisateur;
     }
 
-    public function setEmail(string $email): self
+    public function setEmailUtilisateur(string $emailUtilisateur): self
     {
-        $this->email = $email;
+        $this->emailUtilisateur = $emailUtilisateur;
 
         return $this;
     }

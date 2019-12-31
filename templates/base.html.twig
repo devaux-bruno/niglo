@@ -8,6 +8,7 @@
         <title>{% block title %}Niglo- ASET du Rhône{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
         {% endblock %}
     </head>
     <body>
@@ -21,8 +22,13 @@
             <a class="p-2 text-dark" href="#">Pricing</a>
         </nav>
             {% if is_granted('ROLE_SUPERADMIN') %}
+
                 <li class="nav-item-icon dropdown">
-                    <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="icon_nav" src="{{ asset('asset/img/profil/') }}" ></a>
+                    {% if app.user.photo is defined %}
+                        <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/profil/') }}{{ app.user.photo }}" alt="image profil"></a>
+                    {% else %}
+                        <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/user-cirle-regular.svg') }}" alt="image profil vide"></a>
+                    {% endif %}
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <a class="dropdown-item" href="#">Mon profil</a>
                         <a class="dropdown-item" href="#">Écrire un Article</a>
@@ -35,7 +41,11 @@
                 </li>
                 {% elseif is_granted('ROLE_ADMIN') %}
                     <li class="nav-item-icon dropdown">
-                        <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="icon_nav" src="{{ asset('asset/img/cogs-solid.svg') }}" ></a>
+                        {% if app.user.photo is defined %}
+                        <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/profil/') }}{{ app.user.photo }}" alt="image profil"></a>
+                        {% else %}
+                        <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/user-cirle-regular.svg') }}" alt="image profil vide"></a>
+                        {% endif %}
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="#">Mon profil</a>
                             <a class="dropdown-item" href="#">Écrire un Article</a>
@@ -47,7 +57,11 @@
                     </li>
             {% elseif is_granted('ROLE_MEMBER') %}
                 <li class="nav-item-icon dropdown">
-                    <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="icon_nav" src="{{ asset('asset/img/cogs-solid.svg') }}" ></a>
+                    {% if app.user.photo is defined %}
+                        <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/profil/') }}{{ app.user.photo }}" alt="image profil"></a>
+                    {% else %}
+                        <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/user-cirle-regular.svg') }}" alt="image profil vide"></a>
+                    {% endif %}
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <a class="dropdown-item" href="#">Mon profil</a>
                         <a class="btn btn-outline-light" href="{{ path('app_logout') }}">Deconnexion</a>
@@ -76,6 +90,39 @@
         {% block body %}
 
         {% endblock %}
+    {% block footer %}
+        <footer class="my-md-5 border-top">
+            <div class="row justify-content-center mt-3 footer">
+                <div class="col-12 col-sm-12 col-md-4 justify-content-center mt-3 mb-4">
+                    <p class="contact">
+                        <span class="bold">Nous contacter</span>
+                        <br>
+                        <span class="bold">Tel:</span> 06 00 00 00 00
+                        <br>
+                        <span class="bold">Mail:</span> contact@devaux-bruno.com</p>
+                    <div class="resauxSociaux">
+                        <a target="_blank" href="#"><img class="logoSociaux" alt="logo Tweeter" src="{{ asset('asset/img/instagram-brands.svg') }}"></a>
+                        <a target="_blank" href="#"><img class="logoSociaux" alt="logo Facebook" src="{{ asset('asset/img/facebook-square-brands.svg') }}"></a>
+                        <a target="_blank" href="#"><img class="logoSociaux" alt="logo Instagram" src="{{ asset('asset/img/twitter-square-brands.svg') }}"></a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 justify-content-center mt-3 mb-4">
+                    <div class="gridCenter">
+                        <a class="titreFooter" href="#">Derniers Article</a>
+                        <a class="titreFooter" href="#">Le camion</a>
+                        <a class="titreFooter" href="#">Bénévoles</a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 justify-content-center mt-3 mb-4">
+                    <div class="gridCenter">
+                        <a class="titreFooter" href="#">Mentions légales</a>
+                        <a class="titreFooter" href="#">Politique de confidentialité</a>
+                        <a class="titreFooter" href="#">CGU</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

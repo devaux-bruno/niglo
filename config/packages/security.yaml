@@ -2,12 +2,10 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         database_users:
-            entity: { class:  App\Entity\Utilisateur, property: email }
+            entity:
+                class: 'App\Entity\Utilisateur'
+                property: 'emailUtilisateur'
     encoders:
-        #Symfony\Component\Security\Core\User\User: plaintext
-        #App\Entity\UserCustomer: plaintext
-        Symfony\Component\Security\Core\User\User:
-            algorithm: auto
         App\Entity\Utilisateur:
             algorithm: auto
 
@@ -27,7 +25,7 @@ security:
                 path: app_logout
             guard:
                 authenticators:
-                    - App\Security\AppCustomerAuthenticator
+                    - App\Security\AppCustomAuthenticator
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
