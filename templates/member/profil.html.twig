@@ -13,7 +13,7 @@
                 <p>Inscrit depuis le {{ app.user.dateInscription | date('d/m/Y à H:m:s') }}</p>
                 <p>
                     <a class="btn btn-primary mt-2" href="{{ path('user_edit', {'id' : app.user.id })  }}">Modifier votre profil</a>
-                    <a class="btn btn-primary mt-2" href="#">Modifier mot de passe</a>
+                    <a class="btn btn-primary mt-2" href="{{ path('password_edit', {'userId' : app.user.id })  }}">Modifier mot de passe</a>
                 </p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 profilDesc">

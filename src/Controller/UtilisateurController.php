@@ -5,12 +5,14 @@ namespace App\Controller;
 
 
 use App\Entity\Utilisateur;
+use App\Form\newPasswordType;
 use App\Form\UtilisateurEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UtilisateurController extends AbstractController
 {
@@ -84,6 +86,10 @@ class UtilisateurController extends AbstractController
 
                         return $this->redirectToRoute('user_edit', []);
                     }
+                    $id->setPhoto($fileName);
+                }
+                else{
+                    $id->setPhoto($userPicture);
                 }
             }
             else{
@@ -101,10 +107,14 @@ class UtilisateurController extends AbstractController
 
                         return $this->redirectToRoute('user_edit', []);
                     }
+                    $id->setPhoto($fileName);
                 }
+                else{
+                    $id->setPhoto($userPicture);
+                }
+
             }
 
-            $id->setPhoto($fileName);
             $entityManager->persist($id);
             $entityManager->flush();
 
@@ -117,7 +127,60 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/member/passwordEdit/{userId}", name="password_edit")
+     */
+    public function editPassword(Request $request, Utilisateur $userId, UserPasswordEncoderInterface $encoder)
+    {
 
+        // require the user to log in during *this* session
+        // if they were only logged in via a remember me cookie, they
+        // will be redirected to the login page
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $idUser = $this->getUser()->getId();
+        $numIdUser = $userId->getId();
+
+        if($idUser != $numIdUser ) {
+            $this->addFlash('error', 'Vous ne pouvez modifier que votre profil');
+            return $this->redirectToRoute('home',[]);
+        }
+
+        $form = $this->createForm(newPasswordType::class, $userId, []);
+        $form->handleRequest($request);
+
+        if( $form->isSubmitted() && $form->isValid())
+        {
+            $dataold = $form->get('mdp')->getData();
+            $datanew = $form->get('newPassword')->getData();
+            $checkPassword = $encoder->isPasswordValid($userId, $dataold);
+
+            if($checkPassword === true){
+
+                $doctrine = $this->getDoctrine();
+                $entityManager = $doctrine->getManager();
+
+                $newPassword = $encoder->encodePassword($userId, $datanew);
+                $userId->setMdp($newPassword);
+
+                $entityManager->persist($userId);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre mot de passe a bien été modifié!');
+
+                return $this->redirectToRoute('profil_index',[]);
+            }
+            else{
+                $this->addFlash('error', 'Désolé, votre ancien mot de passe n\'est pas correct');
+                return $this->redirectToRoute('password_edit', ['userId' => $idUser]);
+            }
+        }
+
+        return $this->render('member/password_edit.html.twig',[
+            'formUserEdit' => $form->createView(),
+        ]);
+
+    }
 
     /**
      * @return string
