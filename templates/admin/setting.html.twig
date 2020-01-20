@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Paramètres du site</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                {{ form_start(formAdminEdit) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formAdminEdit) }}
+                    <span class="text-danger">{{ form_errors(formAdminEdit.publier) }}</span>
+                </div>
+                <div class="row justify-content-center mt-2">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminEdit.publier) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_rest(formAdminEdit) }}
+                        {{ form_end(formAdminEdit) }}
+                        <a class="btn btn-secondary mt-2" href="{{ path('home') }}">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

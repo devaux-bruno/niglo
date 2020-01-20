@@ -100,7 +100,7 @@ class ServiceController extends AbstractController
 
         if( $form->isSubmitted() && $form->isValid())
         {
-
+            $serviceId->setPublier(0);
             $serviceId->setDateCreation(new \DateTime()) ;
             $entityManager->persist($serviceId);
             $entityManager->flush();

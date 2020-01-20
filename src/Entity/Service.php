@@ -29,6 +29,29 @@ class Service extends AbstractController
     private $description;
 
     /**
+     * @ORM\Column(name="publier",type="string", length=60)
+     */
+    private $publier;
+
+    /**
+     * @return mixed
+     */
+    public function getPublier()
+    {
+        return $this->publier;
+    }
+
+    /**
+     * @param mixed $publier
+     * @return Service
+     */
+    public function setPublier($publier)
+    {
+        $this->publier = $publier;
+        return $this;
+    }
+
+    /**
      * @ORM\Column(name="date_creation",type="datetime")
      */
     private $dateCreation;

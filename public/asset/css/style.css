@@ -6,13 +6,17 @@ svg{height: 50px;}
 .nav-item-icon{list-style: none}
 .dropdown-menu{transform: translate3d(-125px, 80px, 0px) !important;}
 td{vertical-align: middle !important;}
-
+input[type=checkbox]{margin-left: 5px;margin-right: 5px;}
 
 /************************************************************
 *******************     Navigation     **********************
 *************************************************************/
 .iconNav {height: 80px;}
 .shadow{box-shadow: 0 .85rem .5rem rgba(255,115,50,.075)!important;}
+.languagesList{list-style: none; display: inline-flex;padding-inline-start: 10px; }
+.languagesList li{ border-right: 1px solid black; padding-left: 10px}
+.languagesList li a{margin-right: 10px}
+.languagesList li:last-child{ border-right:none}
 
 /************************************************************
 *******************        Profil      **********************

@@ -16,10 +16,9 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow">
         <h1 class="my-0 mr-md-auto font-weight-normal mt-2"><img src="{{ asset('asset/img/logo.gif') }}" alt="Niglo Camion"></h1>
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="#">Features</a>
-            <a class="p-2 text-dark" href="#">Enterprise</a>
-            <a class="p-2 text-dark" href="#">Support</a>
-            <a class="p-2 text-dark" href="#">Pricing</a>
+            <ul class="languagesList row center">
+                {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
+            </ul>
         </nav>
             {% if is_granted('ROLE_SUPERADMIN') %}
 
@@ -36,6 +35,7 @@
                         <a class="dropdown-item" href="#">Gestion des Articles</a>
                         <a class="dropdown-item" href="{{ path('service_index') }}">Gestion des Services</a>
                         <a class="dropdown-item" href="#">Gestion des Commentaires</a>
+                        <a class="dropdown-item" href="{{ path('setting') }}">Paramètres</a>
                         <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
                     </div>
                 </li>
