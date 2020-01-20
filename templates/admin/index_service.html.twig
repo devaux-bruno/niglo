@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="text-center mt-5 mb-3">Gestion des services</h2>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('service_add') }}">Ajouter un Service</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Numéro Id</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Date de création</th>
+                    <th class="tabAcion">Action</th>
+                </tr>
+                <div id="accordion mb-3">
+                    {% for lang in resultatedit %}
+                        <tr>
+                            <td>{{ lang.id }}</td>
+                            <td>{{ lang.Titre }}</td>
+                            <td>{{ lang.description }}</td>
+                            <td>{{ lang.dateCreation|date('d/m/Y H:m') }}</td>
+                            <td>
+                                <a class="btn btn-primary"
+                                   href="{{ path('service_edit', {'serviceId' : lang.Id}) }}">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="{{ path('service_delete', {'serviceId' : lang.Id}) }}">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}

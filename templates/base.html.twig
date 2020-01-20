@@ -34,7 +34,7 @@
                         <a class="dropdown-item" href="#">Écrire un Article</a>
                         <a class="dropdown-item" href="{{ path('user_index') }}">Gestion des Membres</a>
                         <a class="dropdown-item" href="#">Gestion des Articles</a>
-                        <a class="dropdown-item" href="#">Gestion des Services</a>
+                        <a class="dropdown-item" href="{{ path('service_index') }}">Gestion des Services</a>
                         <a class="dropdown-item" href="#">Gestion des Commentaires</a>
                         <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
                     </div>
@@ -49,8 +49,8 @@
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="#">Mon profil</a>
                             <a class="dropdown-item" href="#">Écrire un Article</a>
-                            <a class="dropdown-item" href="#">Gestion des Membres</a>
-                            <a class="dropdown-item" href="#">Gestion des Articles</a>
+                            <a class="dropdown-item" href="{{ path('user_index') }}">Gestion des Membres</a>
+                            <a class="dropdown-item" href="{{ path('service_index') }}">Gestion des Articles</a>
                             <a class="dropdown-item" href="#">Gestion des Commentaires</a>
                             <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
                         </div>
