@@ -6,6 +6,7 @@ svg{height: 50px;}
 .nav-item-icon{list-style: none}
 .dropdown-menu{transform: translate3d(-125px, 80px, 0px) !important;}
 td{vertical-align: middle !important;}
+footer{ bottom: 0px; position: absolute; width: 100%;}
 
 /************************************************************
 *******************     Navigation     **********************
@@ -42,4 +43,7 @@ td{vertical-align: middle !important;}
 *****************************************************************************************************************************/
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {font-size: 3.5rem;}
+}
+@media (max-width: 768px) {
+    footer{ bottom: auto;}
 }

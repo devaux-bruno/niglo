@@ -46,10 +46,10 @@
                                 {{ membre.dateInscription |date('d/m/Y H:m:s') }}
                             </td>
                             <td>
-                                {% if member.photo is defined %}
-                                <img class="logoLanguages" src="{{ asset('asset/img/profil/') }}{{ membre.photo }}" alt="picture {{ membre.pseudo }}">
-                                {% else %}
+                                {% if membre.photo is empty %}
                                     <img class="logoLanguages" src="{{ asset('asset/img/user-cirle-regular.svg') }}" alt="no picture">
+                                {% else %}
+                                    <img class="logoLanguages" src="{{ asset('asset/img/profil/') }}{{ membre.photo }}" alt="picture {{ membre.pseudo }}">
                                 {% endif %}
                             </td>
                             <td>
