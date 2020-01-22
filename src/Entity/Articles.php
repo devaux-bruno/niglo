@@ -37,7 +37,7 @@ class Articles extends AbstractController
     private $texte;
 
     /**
-     * @ORM\Column(name="image_principale",type="string", length=255)
+     * @ORM\Column(name="image_principale",type="string", length=255, nullable=true)
      */
     private $imagePrincipale;
 
@@ -116,12 +116,12 @@ class Articles extends AbstractController
         return $this;
     }
 
-    public function getImagePrincipale(): ?string
+    public function getImagePrincipale()
     {
         return $this->imagePrincipale;
     }
 
-    public function setImagePrincipale(string $imagePrincipale): self
+    public function setImagePrincipale(?string $imagePrincipale)
     {
         $this->imagePrincipale = $imagePrincipale;
 

@@ -6,11 +6,11 @@
         <div class="row justify-content-center center mb-3">
             {% if app.user is same as (resultatArticle.idUtilisateur) %}
                 <a class="btn btn-primary"
-                   href="#">
+                   href="{{ path('admin_article_edit',{'id' : article.id}) }}">
                     Modifier mon article
                 </a>
                 <a class="btn btn-danger"
-                   href="#">
+                   href="{{ path('article_admin_delete',{'id' : article.id}) }}">
                     Supprimer mon article
                 </a>
             {% endif %}

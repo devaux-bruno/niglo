@@ -34,11 +34,11 @@
                             </td>
                             <td class="middle">
                                 <a class="btn btn-primary"
-                                   href="#">
+                                   href="{{ path('admin_article_edit',{'id' : article.id}) }}">
                                     Modifier
                                 </a>
                                 <a class="btn btn-danger"
-                                   href="#">
+                                   href="{{ path('article_admin_delete',{'id' : article.id}) }}">
                                     Supprimer
                                 </a>
                             </td>

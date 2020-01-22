@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Articles;
 use App\Entity\Service;
+use phpDocumentor\Reflection\File;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -53,7 +54,7 @@ class AdminArticleType extends AbstractType
                 'class' => Service::class,
                 // uses the User.username property as the visible option string
                 'choice_label' => 'Titre',
-                'label' => 'Quel service ?',
+                'label' => 'Quel service?',
                 'attr' => [
                     'class' => "form-control mb-3"
                 ],
