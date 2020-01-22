@@ -12,7 +12,8 @@
                     <th>Id</th>
                     <th>Titre</th>
                     <th>Description courte</th>
-                    <th>Date de création</th>
+                    <th>Date de création <br> Utilisateur</th>
+                    <th>Service </th>
                     <th>Photo</th>
                     <th width="250px">Action</th>
                 </tr>
@@ -26,7 +27,11 @@
                             </td>
                             <td class="middle"><span>{{ article.titre | capitalize }}</span></td>
                             <td class="middle"><span>{{ article.descriptionCourte }}</span></td>
-                            <td class="middle"><span>{{ article.datePublication |date('d/m/Y à H:m:s') }}</span></td>
+                            <td class="middle"><span>{{ article.datePublication |date('d/m/Y à H:m:s') }}</span>
+                                <br>
+                                <span>{{ article.idUtilisateur.pseudo }}</span>
+                            </td>
+                            <td class="middle"><span>{{ article.idService.Titre }}</span></td>
                             <td class="middle">
                                 <a class="articleLien" target="_blank" href="#">
                                     <img class="AdminImgArticle" src="{{ asset('asset/img/article/') }}{{ article.imagePrincipale }}" alt="picture {{ article.id }}">
@@ -44,7 +49,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="6">
+                            <td colspan="8">
                                 <p>
                                     <a class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapse{{ article.id }}" aria-expanded="false" aria-controls="collapse{{ article.id }}">
                                         Voir l'article

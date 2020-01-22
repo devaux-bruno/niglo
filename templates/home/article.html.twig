@@ -2,15 +2,15 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="text-center mt-5 mb-5">{{ resultatArticle.titre | capitalize}}</h1>
+        <h2 class="text-center mt-5 mb-5">{{ resultatArticle.titre | capitalize}}</h2>
         <div class="row justify-content-center center mb-3">
             {% if app.user is same as (resultatArticle.idUtilisateur) %}
                 <a class="btn btn-primary"
-                   href="{{ path('admin_article_edit',{'id' : article.id}) }}">
+                   href="{{ path('admin_article_edit',{'id' : resultatArticle.id}) }}">
                     Modifier mon article
                 </a>
                 <a class="btn btn-danger"
-                   href="{{ path('article_admin_delete',{'id' : article.id}) }}">
+                   href="{{ path('article_admin_delete',{'id' : resultatArticle.id}) }}">
                     Supprimer mon article
                 </a>
             {% endif %}
