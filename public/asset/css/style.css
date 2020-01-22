@@ -42,6 +42,16 @@ input[type=checkbox]{margin-left: 5px;margin-right: 5px;}
 .footer{width: 100%;}
 .border-top {box-shadow: -0 -0.85rem 0.5rem rgba(255,115,50,.075)!important; -moz-border-radius-topleft: 25px;-moz-border-radius-topright: 25px}
 
+
+/************************************************************
+*******************    Page admin      **********************
+*************************************************************/
+.AdminImgArticle{height: 100px;}
+.middle{vertical-align: middle !important; }
+.adminArticle{text-align: left;background-color: #FFFFFF;border: 1px solid #293133; border-radius: 20px;padding: 20px; width:94vw;}
+table tr, table th{ border-bottom: 1px solid #293133;}
+.articleLienAdmin{color: black; text-decoration: underline}
+
 /****************************************************************************************************************************
 ***************************************************     Responsive     *********************************************************
 *****************************************************************************************************************************/

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -161,42 +163,23 @@ class Utilisateur implements UserInterface
      */
     private $dateInscription;
 
-    /**
-     * @return mixed
-     */
-    public function getIdUtilisateurService()
-    {
-        return $this->idUtilisateurService;
-    }
 
     /**
-     * @param mixed $idUtilisateurService
-     * @return Utilisateur
-     */
-    public function setIdUtilisateurService($idUtilisateurService)
-    {
-        $this->idUtilisateurService = $idUtilisateurService;
-        return $this;
-    }
-
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="ServiceUtilisateur")
-     */
-    private $idUtilisateurService;
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Articles", inversedBy="idUtilisateur")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="Articles", mappedBy="idUtilisateur")
      */
     private $UtilisateurArticle;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commentaires", inversedBy="idUtilisateur")
-     * @ORM\JoinColumn(nullable=true)
+     *  @ORM\OneToMany(targetEntity="Commentaires", mappedBy="idUtilisateur")
      */
     private $UtilisateurCommentaires;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Organisateur", mappedBy="idUtilisateurs")
+     */
+    private $organisateurs;
+
 
     /**
      * @return mixed
@@ -378,6 +361,42 @@ class Utilisateur implements UserInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getIdUtilisateurService()
+    {
+        return $this->idUtilisateurService;
+    }
+
+    /**
+     * @param mixed $idUtilisateurService
+     * @return Utilisateur
+     */
+    public function setIdUtilisateurService($idUtilisateurService)
+    {
+        $this->idUtilisateurService = $idUtilisateurService;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOrganisateurs(): ArrayCollection
+    {
+        return $this->organisateurs;
+    }
+
+    /**
+     * @param ArrayCollection $organisateurs
+     * @return Utilisateur
+     */
+    public function setOrganisateurs(ArrayCollection $organisateurs): Utilisateur
+    {
+        $this->organisateurs = $organisateurs;
+        return $this;
+    }
+
+    /**
      * @inheritDoc
      */
     public function serialize()
@@ -392,4 +411,5 @@ class Utilisateur implements UserInterface
     {
         // TODO: Implement unserialize() method.
     }
+
 }

@@ -41,7 +41,7 @@ class UtilisateurType extends AbstractType
                     'class' => "form-control"
                 ],
             ])
-            ->add('email', EmailType::class, [
+            ->add('emailUtilisateur', EmailType::class, [
                 'label' => 'Votre adresse mail : ',
                 'attr' => [
                     'class' => "form-control"

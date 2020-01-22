@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Gestion des Articles</h1>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('article_add') }}">Ajouter un Article</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Description courte</th>
+                    <th>Date de création</th>
+                    <th>Photo</th>
+                    <th width="250px">Action</th>
+                </tr>
+                <div id="accordion">
+                    {% for article in resultatedit %}
+                        <tr>
+                            <td class="middle">
+                                <a class="articleLienAdmin" target="_blank" href="#">
+                                    <span>{{ article.id }}</span>
+                                </a>
+                            </td>
+                            <td class="middle"><span>{{ article.titre | capitalize }}</span></td>
+                            <td class="middle"><span>{{ article.descriptionCourte }}</span></td>
+                            <td class="middle"><span>{{ article.datePublication |date('d/m/Y à H:m:s') }}</span></td>
+                            <td class="middle">
+                                <a class="articleLien" target="_blank" href="#">
+                                    <img class="AdminImgArticle" src="{{ asset('asset/img/article/') }}{{ article.imagePrincipale }}" alt="picture {{ article.id }}">
+                                </a>
+                            </td>
+                            <td class="middle">
+                                <a class="btn btn-primary"
+                                   href="#">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="#">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <p>
+                                    <a class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapse{{ article.id }}" aria-expanded="false" aria-controls="collapse{{ article.id }}">
+                                        Voir l'article
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapse{{ article.id }}">
+                                    <div class="adminArticle">
+                                        {{ article.texte | raw }}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -4,24 +4,42 @@
 namespace App\Form;
 
 
+use App\Entity\Organisateur;
+
 use App\Entity\Service;
+use App\Entity\Utilisateur;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PublierType extends AbstractType
+class AssociationType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $formBuilder, array $options)
     {
         $formBuilder
-            ->add('publier',EntityType::class, [
-                'label' => 'Paramètres affichés dans le menu :',
+            ->add('idUtilisateur',EntityType::class, [
+                'label' => 'Qui ?',
+                'class' => Utilisateur::class,
+                'choice_label' => 'pseudo',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->andWhere('u.status = :val')
+                        ->setParameter('val', 'admin')
+                        ->orderBy('u.pseudo', 'ASC');
+
+                },
+                'attr' => [
+                    'class' => "form-control"
+                ],
+                'required'=> true,
+            ])
+            ->add('idService', EntityType ::class, [
+                'label' => 'Quelle service ?',
                 'class' => Service::class,
-                'multiple' => true,
-                'expanded' => true,
                 'choice_label' => 'Titre',
                 'attr' => [
                     'class' => "form-control"
@@ -34,12 +52,13 @@ class PublierType extends AbstractType
                     'class' => "btn btn-primary mt-3"
                 ],
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Service::class,
+            'data_class' => Organisateur::class,
         ]);
     }
 }

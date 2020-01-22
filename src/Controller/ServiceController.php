@@ -4,7 +4,9 @@
 namespace App\Controller;
 
 
+use App\Entity\Organisateur;
 use App\Entity\Service;
+use App\Form\AssociationType;
 use App\Form\ServiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +45,7 @@ class ServiceController extends AbstractController
         {
 
             $lang->setDateCreation(new \DateTime()) ;
-
+            $lang->setPublier('0');
             $doctrine = $this->getDoctrine();
             $entityManager = $doctrine->getManager();
             $entityManager->persist($lang);
@@ -91,7 +93,6 @@ class ServiceController extends AbstractController
     public function adminEditLang(Request $request, Service $serviceId)
     {
 
-
         $doctrine = $this->getDoctrine();
         $entityManager = $doctrine->getManager();
 
@@ -117,5 +118,33 @@ class ServiceController extends AbstractController
 
     }
 
+    /**
+     * @Route("/admin/associe", name="associer")
+     */
+    public function addAssocier(Request $request)
+    {
+        $orga = new Organisateur();
+
+        $formOrga = $this->createForm(AssociationType::Class, $orga, []);
+        $formOrga->handleRequest($request);
+
+        if( $formOrga->isSubmitted() && !$formOrga->isEmpty() && $formOrga->isValid())
+        {
+            $orga->setDateAjout(new \DateTime()) ;
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($orga);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Le mebre a bien été associé à ce service!');
+
+            return $this->redirectToRoute('service_index',[]);
+
+
+        }
+        return $this->render('admin/organisation.html.twig',[
+            'formAjout' => $formOrga->createView(),
+        ]);
+    }
 
 }

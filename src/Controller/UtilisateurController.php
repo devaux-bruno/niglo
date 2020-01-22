@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Utilisateur;
 use App\Form\newPasswordType;
 use App\Form\UtilisateurEditType;
+use App\Form\UtilisateurType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -181,6 +182,7 @@ class UtilisateurController extends AbstractController
         ]);
 
     }
+
 
     /**
      * @return string

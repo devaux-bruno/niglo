@@ -57,32 +57,33 @@ class Service extends AbstractController
     private $dateCreation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Articles", inversedBy="idService")
+     * @ORM\OneToMany(targetEntity="App\Entity\Articles", mappedBy="idService")
      */
     private $ServiceArticle;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="idUtilisateurService")
+     * @ORM\OneToMany(targetEntity="App\Entity\Organisateur", mappedBy="idService")
      */
-    private $ServiceUtilisateur;
+    private $ServiceOrganisateur;
 
     /**
      * @return mixed
      */
-    public function getServiceUtilisateur()
+    public function getServiceOrganisateur()
     {
-        return $this->ServiceUtilisateur;
+        return $this->ServiceOrganisateur;
     }
 
     /**
-     * @param mixed $ServiceUtilisateur
+     * @param mixed $ServiceOrganisateur
      * @return Service
      */
-    public function setServiceUtilisateur($ServiceUtilisateur)
+    public function setServiceOrganisateur($ServiceOrganisateur)
     {
-        $this->ServiceUtilisateur = $ServiceUtilisateur;
+        $this->ServiceOrganisateur = $ServiceOrganisateur;
         return $this;
     }
+
 
     public function getId(): ?int
     {

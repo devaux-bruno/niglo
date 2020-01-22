@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -40,15 +41,27 @@ class Articles extends AbstractController
      */
     private $imagePrincipale;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Service", mappedBy="ServiceArticle")
+     * @var Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="UtilisateurArticle")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="article_user_id" , referencedColumnName="id")
+     * })
+     */
+    private $idUtilisateur;
+
+    /**
+     * @var Service
+     *
+     * @ORM\ManyToOne(targetEntity="Service", inversedBy="ServiceArticle")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="service_id", referencedColumnName="id")
+     * })
      */
     private $idService;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Utilisateur", mappedBy="UtilisateurArticle", orphanRemoval=true)
-     */
-    private $idUtilisateur;
 
     /**
      * @ORM\Column(name="date_publication",type="datetime")
@@ -57,15 +70,10 @@ class Articles extends AbstractController
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Commentaires", inversedBy="idArticle")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $ArticlesCommentaires;
 
-    public function __construct()
-    {
-        $this->idService = new ArrayCollection();
-        $this->idUtilisateur = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -121,63 +129,32 @@ class Articles extends AbstractController
     }
 
     /**
-     * @return Collection|Service[]
+     * @return Service
      */
-    public function getIdService(): Collection
+    public function getIdService()
     {
         return $this->idService;
     }
 
-    public function addIdService(Service $idService): self
+    public function setIdService(?Service $idService): self
     {
-        if (!$this->idService->contains($idService)) {
-            $this->idService[] = $idService;
-            $idService->setServiceArticle($this);
-        }
+        $this->idService = $idService;
 
         return $this;
     }
 
-    public function removeIdService(Service $idService): self
-    {
-        if ($this->idService->contains($idService)) {
-            $this->idService->removeElement($idService);
-            // set the owning side to null (unless already changed)
-            if ($idService->getServiceArticle() === $this) {
-                $idService->setServiceArticle(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
-     * @return Collection|Utilisateur[]
+     * @return Utilisateur
      */
-    public function getIdUtilisateur(): Collection
+    public function getIdUtilisateur()
     {
         return $this->idUtilisateur;
     }
 
-    public function addIdUtilisateur(Utilisateur $idUtilisateur): self
+    public function setIdUtilisateur(?Utilisateur $idUtilisateur): self
     {
-        if (!$this->idUtilisateur->contains($idUtilisateur)) {
-            $this->idUtilisateur[] = $idUtilisateur;
-            $idUtilisateur->setUtilisateurArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdUtilisateur(Utilisateur $idUtilisateur): self
-    {
-        if ($this->idUtilisateur->contains($idUtilisateur)) {
-            $this->idUtilisateur->removeElement($idUtilisateur);
-            // set the owning side to null (unless already changed)
-            if ($idUtilisateur->getUtilisateurArticle() === $this) {
-                $idUtilisateur->setUtilisateurArticle(null);
-            }
-        }
+        $this->idUtilisateur = $idUtilisateur;
 
         return $this;
     }

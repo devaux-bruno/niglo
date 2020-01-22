@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Créer votre Article</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                {{ form_start(formAjoutarticle) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formAjoutarticle) }}
+                    <span class="text-danger">{{ form_errors(formAjoutarticle.titre) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjoutarticle.descriptionCourte) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjoutarticle.imagePrincipale) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjoutarticle.idService) }}</span>
+                    <span class="text-danger">{{ form_errors(formAjoutarticle.texte) }}</span>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+                        {{ form_row(formAjoutarticle.titre) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+                        {{ form_row(formAjoutarticle.descriptionCourte) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+                        {{ form_row(formAjoutarticle.imagePrincipale) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+                        {{ form_row(formAjoutarticle.idService) }}
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+                        {{ form_row(formAjoutarticle.texte) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_rest(formAjoutarticle) }}
+                        {{ form_end(formAjoutarticle) }}
+                        <a class="btn btn-secondary mt-2" href="{{ path('article_index') }}">Retour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdn.ckeditor.com/4.13.0/full/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'admin_article[texte]' );
+    </script>
+{% endblock %}

@@ -32,9 +32,6 @@ class BaseController extends AbstractController
      */
     public function setting(Request $request)
     {
-        $doctrine = $this->getDoctrine();
-        $menuRepository = $doctrine->getRepository(Service::class);
-        $resultatmenu = $menuRepository->findAll();
 
         $formparam = $this->createForm(PublierType::Class);
         $formparam->handleRequest($request);
@@ -42,24 +39,18 @@ class BaseController extends AbstractController
         if( $formparam->isSubmitted() && !$formparam->isEmpty() && $formparam->isValid())
         {
 
-            $serviceId = $formparam->get('publier')->getData();
+            $data = $formparam->get('publier')->getData();
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $menu = $entityManager->getRepository(Service::class)->find($serviceId);
-
-            $menu->setPublier(1);
-            $entityManager->persist($menu);
+            $doctrine = $this->getDoctrine();
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($data);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Le service a bien été ajouté au menu!');
-
+            $this->addFlash('success', 'Les paramètres ont bien étés modifiés!');
             return $this->redirectToRoute('setting',[]);
-
-
         }
         return $this->render('admin/setting.html.twig',[
             'formAdminEdit' => $formparam->createView(),
-            'resultatmenu' => $resultatmenu,
         ]);
     }
 }

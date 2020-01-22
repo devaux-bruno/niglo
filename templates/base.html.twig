@@ -30,9 +30,9 @@
                     {% endif %}
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <a class="dropdown-item" href="{{ path('profil_index') }}">Mon profil</a>
-                        <a class="dropdown-item" href="#">Écrire un Article</a>
+                        <a class="dropdown-item" href="{{ path('article_add') }}">Écrire un Article</a>
                         <a class="dropdown-item" href="{{ path('user_index') }}">Gestion des Membres</a>
-                        <a class="dropdown-item" href="#">Gestion des Articles</a>
+                        <a class="dropdown-item" href="{{ path('article_index') }}">Gestion des Articles</a>
                         <a class="dropdown-item" href="{{ path('service_index') }}">Gestion des Services</a>
                         <a class="dropdown-item" href="#">Gestion des Commentaires</a>
                         <a class="dropdown-item" href="{{ path('setting') }}">Paramètres</a>
@@ -47,10 +47,11 @@
                         <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/user-cirle-regular.svg') }}" alt="image profil vide"></a>
                         {% endif %}
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="#">Mon profil</a>
-                            <a class="dropdown-item" href="#">Écrire un Article</a>
+                            <a class="dropdown-item" href="{{ path('profil_index') }}">Mon profil</a>
+                            <a class="dropdown-item" href="#">Mes Articles</a>
+                            <a class="dropdown-item" href="{{ path('article_add') }}">Écrire un Article</a>
                             <a class="dropdown-item" href="{{ path('user_index') }}">Gestion des Membres</a>
-                            <a class="dropdown-item" href="{{ path('service_index') }}">Gestion des Articles</a>
+                            <a class="dropdown-item" href="{{ path('service_index') }}">Gestion des Services</a>
                             <a class="dropdown-item" href="#">Gestion des Commentaires</a>
                             <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
                         </div>
@@ -63,8 +64,8 @@
                         <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/user-cirle-regular.svg') }}" alt="image profil vide"></a>
                     {% endif %}
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="#">Mon profil</a>
-                        <a class="btn btn-outline-light" href="{{ path('app_logout') }}">Deconnexion</a>
+                        <a class="dropdown-item" href="{{ path('profil_index') }}">Mon profil</a>
+                        <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
                     </div>
                 </li>
             {% else %}

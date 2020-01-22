@@ -21,9 +21,15 @@ class Commentaires extends AbstractController
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Utilisateur", mappedBy="UtilisateurCommentaires", orphanRemoval=true)
+     * @var Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="UtilisateurCommentaires")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
      */
     private $idUtilisateur;
+
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Articles", mappedBy="ArticlesCommentaires", orphanRemoval=true)
@@ -45,11 +51,6 @@ class Commentaires extends AbstractController
      */
     private $signaler;
 
-    public function __construct()
-    {
-        $this->idUtilisateur = new ArrayCollection();
-        $this->idArticle = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
