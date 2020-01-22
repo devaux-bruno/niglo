@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mt-5 mb-5">{{ resultatArticle.titre | capitalize}}</h1>
+        <div class="row justify-content-center center mb-3">
+            {% if app.user is same as (resultatArticle.idUtilisateur) %}
+                <a class="btn btn-primary"
+                   href="#">
+                    Modifier mon article
+                </a>
+                <a class="btn btn-danger"
+                   href="#">
+                    Supprimer mon article
+                </a>
+            {% endif %}
+        </div>
+        <div class="row mb-3">
+            <div class="articleUser">
+                {% if resultatArticle.idUtilisateur.photo is not empty %}
+                    <img class="pictureProfilArticle" src="{{ asset('asset/img/user-circle-regular.svg') }}" alt="nopic">
+                {% else %}
+                    <img class="pictureProfilArticle" src="{{ asset('asset/img/profil/') }}{{  resultatArticle.idUtilisateur.photo }}" alt="profil picture">
+                {% endif %}
+                <span>Par {{ resultatArticle.idUtilisateur.pseudo }} le {{ resultatArticle.datePublication |date('d/m/Y à H:m:s') }}</span>
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <div class="articleDetails">
+                <img class="imagePrincipal" src="{{ asset('asset/img/article/') }}{{  resultatArticle.imagePrincipale }}" alt="article picture">
+                {{ resultatArticle.texte | raw }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

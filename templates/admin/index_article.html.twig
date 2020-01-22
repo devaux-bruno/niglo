@@ -20,7 +20,7 @@
                     {% for article in resultatedit %}
                         <tr>
                             <td class="middle">
-                                <a class="articleLienAdmin" target="_blank" href="#">
+                                <a class="articleLienAdmin" target="_blank" href="{{ path('article',{'id' : article.id}) }}">
                                     <span>{{ article.id }}</span>
                                 </a>
                             </td>

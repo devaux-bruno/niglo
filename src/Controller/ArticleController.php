@@ -78,6 +78,21 @@ class ArticleController extends AbstractController
 
 
     /**
+     * @Route("article/{id}", name="article")
+     */
+    public function readArticle(Articles $id)
+    {
+        $doctrine = $this->getDoctrine();
+        $userRepository = $doctrine->getRepository(Articles::class);
+        $resultatArticle= $userRepository->find($id);
+
+        return $this->render('home/article.html.twig', [
+            'resultatArticle' => $resultatArticle,
+        ]);
+    }
+
+
+    /**
      * @return string
      */
     private function generateUniqueFileName()
