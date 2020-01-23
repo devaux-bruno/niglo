@@ -17,7 +17,7 @@
         </div>
         <div class="row mb-3">
             <div class="articleUser">
-                {% if resultatArticle.idUtilisateur.photo is not empty %}
+                {% if resultatArticle.idUtilisateur.photo is empty %}
                     <img class="pictureProfilArticle" src="{{ asset('asset/img/user-circle-regular.svg') }}" alt="nopic">
                 {% else %}
                     <img class="pictureProfilArticle" src="{{ asset('asset/img/profil/') }}{{  resultatArticle.idUtilisateur.photo }}" alt="profil picture">
