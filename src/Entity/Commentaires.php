@@ -25,14 +25,18 @@ class Commentaires extends AbstractController
      *
      * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="UtilisateurCommentaires")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="user_id" , referencedColumnName="id")
      * })
      */
     private $idUtilisateur;
 
-
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Articles", mappedBy="ArticlesCommentaires", orphanRemoval=true)
+     * @var Articles
+     *
+     * @ORM\ManyToOne(targetEntity="Articles", inversedBy="ArticlesCommentaires")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="article_id" , referencedColumnName="id")
+     * })
      */
     private $idArticle;
 
@@ -57,67 +61,7 @@ class Commentaires extends AbstractController
         return $this->id;
     }
 
-    /**
-     * @return Collection|Utilisateur[]
-     */
-    public function getIdUtilisateur(): Collection
-    {
-        return $this->idUtilisateur;
-    }
 
-    public function addIdUtilisateur(Utilisateur $idUtilisateur): self
-    {
-        if (!$this->idUtilisateur->contains($idUtilisateur)) {
-            $this->idUtilisateur[] = $idUtilisateur;
-            $idUtilisateur->setUtilisateurCommentaires($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdUtilisateur(Utilisateur $idUtilisateur): self
-    {
-        if ($this->idUtilisateur->contains($idUtilisateur)) {
-            $this->idUtilisateur->removeElement($idUtilisateur);
-            // set the owning side to null (unless already changed)
-            if ($idUtilisateur->getUtilisateurCommentaires() === $this) {
-                $idUtilisateur->setUtilisateurCommentaires(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Articles[]
-     */
-    public function getIdArticle(): Collection
-    {
-        return $this->idArticle;
-    }
-
-    public function addIdArticle(Articles $idArticle): self
-    {
-        if (!$this->idArticle->contains($idArticle)) {
-            $this->idArticle[] = $idArticle;
-            $idArticle->setArticlesCommentaires($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdArticle(Articles $idArticle): self
-    {
-        if ($this->idArticle->contains($idArticle)) {
-            $this->idArticle->removeElement($idArticle);
-            // set the owning side to null (unless already changed)
-            if ($idArticle->getArticlesCommentaires() === $this) {
-                $idArticle->setArticlesCommentaires(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getCommentaire(): ?string
     {
@@ -152,6 +96,42 @@ class Commentaires extends AbstractController
     {
         $this->signaler = $signaler;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
+    }
+
+    /**
+     * @param mixed $idUtilisateur
+     * @return Commentaires
+     */
+    public function setIdUtilisateur($idUtilisateur)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdArticle()
+    {
+        return $this->idArticle;
+    }
+
+    /**
+     * @param mixed $idArticle
+     * @return Commentaires
+     */
+    public function setIdArticle($idArticle)
+    {
+        $this->idArticle = $idArticle;
         return $this;
     }
 }

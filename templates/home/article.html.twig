@@ -31,6 +31,43 @@
                 {{ resultatArticle.texte | raw }}
             </div>
         </div>
+        {% if app.user %}
+                <div class="row justify-content-center center mb-3">
+                    <span class="titrecommentaire">Ajouter un Commentaires</span>
+                </div>
+                <div class="row justify-content-center center">
+                    <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                        {{ form_start(formAjoutcomment) }}
+                        <div class="my-custom-class-for-errors alert-danger">
+                            {{ form_errors(formAjoutcomment) }}
+                            <span class="text-danger">{{ form_errors(formAjoutcomment.commentaire) }}</span>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                {{ form_row(formAjoutcomment.commentaire) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                                {{ form_row(formAjoutcomment.save) }}
+                                {{ form_end(formAjoutcomment) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% else %}
+            <div class="row justify-content-center mt-3 mb-5">
+                <span class="titrecommentaire">Vous voulez rajouter un commentaire?
+                    <br>
+                    <a href="{{ path('inscription') }}">Inscrivez-vous</a> ou <a href="{{ path('app_login') }}">Connecter vous</a> !
+                </span>
+            </div>
+        {% endif %}
+        <div class="row justify-content-center mb-3">
+            <p id="commentaire" class="titreCommentaire">Commentaires</p>
+        </div>
+        {{ render(controller('App\\Controller\\CommentairesController::readComment',{'id': resultatArticle.id})) }}
+    </div>
     </div>
 
 {% endblock %}

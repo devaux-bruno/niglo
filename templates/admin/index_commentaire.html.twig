@@ -4,36 +4,40 @@
     <h1 class="text-center mt-5 mb-3">Gestion des Commentaires</h1>
     <div class="container-fluid text-center">
         <div class="text-center">
-            <a class="btn btn-primary" href="#">Ajouter un Commentaire</a>
+            <a class="btn btn-primary" href="{{ path('ajouter_commentaire') }}">Ajouter un Commentaire</a>
         </div>
         <div class="table-responsive-sm">
             <table class="table my-5">
                 <tr>
                     <th>Id</th>
                     <th>Pseudo<br> email</th>
+                    <th>Photo</th>
                     <th>Article commenté</th>
                     <th>Commentaire</th>
                     <th>Statut <br> Date de création</th>
-                    <th class="tabAcion">Action</th>
+                    <th class="tabAcion1">Action</th>
                 </tr>
                 {% for comments in pagination %}
-                    {%if comments.signaler != 1  %}
+                    {%if comments.signaler == 1  %}
                         <tr class="red">
                     {% else %}
                         <tr class="green">
                     {% endif %}
                         <td class="middle">
-                            <a class="articleLienAdmin" target="_blank" href="{{ path('article', {'articleId' : comments.idArticle.id}) }}">
+                            <a class="articleLienAdmin" target="_blank" href="{{ path('article', {'id' : comments.idArticle.id}) }}">
                                 <span>{{ comments.id }}</span>
                             </a>
                         </td>
                         <td class="middle">
                             <span>{{ comments.idUtilisateur.pseudo }}</span>
                             <br>
-                            <span>{{ comments.idUtilisateur.email }}</span>
+                            <span>{{ comments.idUtilisateur.emailUtilisateur }}</span>
                         </td>
+                    <td class="middle">
+                        <img class="imgTab" src="{{ asset('asset/img/profil/') }}{{ comments.idUtilisateur.photo }}">
+                    </td>
                         <td class="middle">
-                            <a class="articleLienAdmin" target="_blank" href="{{ path('article', {'articleId' : comments.idArticle.id}) }}">
+                            <a class="articleLienAdmin" target="_blank" href="{{ path('article', {'id' : comments.idArticle.id}) }}">
                                 <span>{{ comments.idArticle.titre }}</span>
                             </a>
                         </td>
@@ -51,11 +55,15 @@
                         </td>
                         <td class="middle">
                             <a class="btn btn-primary"
-                               href="#">
-                                Status
+                               href="{{ path('changer_commentaire', {'id' : comments.id }) }}">
+                                Changer Status
+                            </a>
+                            <a class="btn btn-warning"
+                               href="{{ path('admin_modifier_commentaire', {'id' : comments.id }) }}">
+                                Modifier
                             </a>
                             <a class="btn btn-danger"
-                               href="#">
+                               href="{{ path('admin_comment_delete', {'id' : comments.id }) }}">
                                 Supprimer
                             </a>
                         </td>

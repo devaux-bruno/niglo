@@ -28,6 +28,7 @@ input[type=checkbox]{margin-left: 5px;margin-right: 5px;}
 *******************     Espace Admin     ********************
 *************************************************************/
 .tabAcion{width:250px;}
+.tabAcion1{width:360px;}
 .logoLanguages{max-height: 50px;margin-left: 10px;margin-right: 10px;}
 
 
@@ -53,7 +54,7 @@ table tr, table th{ border-bottom: 1px solid #293133;}
 .articleLienAdmin{color: black; text-decoration: underline}
 .red{background-color: lightcoral}
 .green{background-color: lightgreen}
-
+.imgTab{height: 50px;}
 
 /************************************************************
 *******************    Page article      **********************
@@ -79,6 +80,17 @@ table tr, table th{ border-bottom: 1px solid #293133;}
 *******************    Pagination      **********************
 *************************************************************/
 .pagination{text-align: center; display: block}
+
+/************************************************************
+*******************    Commentaire     **********************
+*************************************************************/
+.pictureProfilComment{height: 60px;border-radius: 30px; top: 10px; position: relative; left: 10px;}
+.resultatComment{width : 60%; background-color: #FFFFFF; border-radius: 20px; border: 1px solid #293133;margin-bottom: 15px; padding-left: 20px; padding-right: 20px;}
+.textComment{padding-left: 75px; padding-right: 15px}
+.pseudoComment{position: relative; top: 15px; left: 15px;}
+.signaledcomment{text-align: left; display: block; color: red;left: 20px; position: relative;}
+.signaledcomment:hover{color: tomato; text-decoration: none}
+.datecomment{text-align: end;}
 
 
 /****************************************************************************************************************************

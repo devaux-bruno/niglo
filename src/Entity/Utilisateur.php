@@ -169,9 +169,8 @@ class Utilisateur implements UserInterface
      */
     private $UtilisateurArticle;
 
-
     /**
-     *  @ORM\OneToMany(targetEntity="Commentaires", mappedBy="idUtilisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaires", mappedBy="idUtilisateur")
      */
     private $UtilisateurCommentaires;
 

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Commentaires;
 use App\Entity\Utilisateur;
 use App\Form\newPasswordType;
 use App\Form\UtilisateurEditType;
@@ -43,10 +44,23 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/member/profil", name="profil_index")
      */
-    public function indexProfil()
+    public function indexProfil(Request $request, PaginatorInterface $paginator)
     {
+        $idUser = $this->getUser()->getId();
+
+        $doctrine = $this->getDoctrine();
+        $commentRepository = $doctrine->getRepository(Commentaires::class);
+        $resultatedit= $commentRepository->findBy(['idUtilisateur'=> $idUser], ['datePost' => 'DESC']);
+
+        $pagination = $paginator->paginate(
+            $resultatedit, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
 
         return $this->render('member/profil.html.twig', [
+            'resultatedit' => $resultatedit,
+            'pagination' => $pagination,
         ]);
     }
 

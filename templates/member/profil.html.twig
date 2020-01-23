@@ -43,5 +43,83 @@
                 {% endif %}
             </div>
         </div>
+        <div class="row">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Mes commentaires
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="table-responsive-sm">
+                                <table class="table my-5">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Pseudo<br> email</th>
+                                        <th>Photo</th>
+                                        <th>Article commenté</th>
+                                        <th>Commentaire</th>
+                                        <th>Statut <br> Date de création</th>
+                                        <th class="tabAcion">Action</th>
+                                    </tr>
+                                    {% for comments in pagination %}
+                                        {%if comments.signaler == 1  %}
+                                            <tr class="red">
+                                        {% else %}
+                                            <tr class="green">
+                                        {% endif %}
+                                            <td class="middle">
+                                                <a class="articleLienAdmin" target="_blank" href="{{ path('article', {'id' : comments.idArticle.id}) }}">
+                                                    <span>{{ comments.id }}</span>
+                                                </a>
+                                            </td>
+                                            <td class="middle">
+                                                <span>{{ comments.idUtilisateur.pseudo }}</span>
+                                                <br>
+                                                <span>{{ comments.idUtilisateur.emailUtilisateur }}</span>
+                                            </td>
+                                            <td class="middle">
+                                                <img class="imgTab" src="{{ asset('asset/img/profil/') }}{{ comments.idUtilisateur.photo }}">
+                                            </td>
+                                            <td class="middle">
+                                                <a class="articleLienAdmin" target="_blank" href="{{ path('article', {'id' : comments.idArticle.id}) }}">
+                                                    <span>{{ comments.idArticle.titre }}</span>
+                                                </a>
+                                            </td>
+                                            <td class="middle"><span>{{ comments.commentaire }}</span></td>
+                                            <td class="middle">
+                                                <span>
+                                                    {% if comments.signaler == 1 %}
+                                                        Signaler
+                                                    {% else %}
+                                                        Publier
+                                                    {% endif %}
+                                                    <br><br>
+                                                    {{ comments.datePost |date('d/m/Y à H:m:s') }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-warning"
+                                                   href="{{ path('modifier_commentaire', {'id' : comments.id }) }}">
+                                                    Modifier
+                                                </a>
+                                                <a class="btn btn-danger"
+                                                   href="{{ path('commentaire_delete', {'id' : comments.id }) }}">
+                                                    Supprimer
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

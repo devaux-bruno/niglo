@@ -69,7 +69,7 @@ class Articles extends AbstractController
     private $datePublication;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commentaires", inversedBy="idArticle")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaires", mappedBy="idArticle")
      * @ORM\JoinColumn(nullable=true)
      */
     private $ArticlesCommentaires;

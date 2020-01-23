@@ -5,7 +5,9 @@ namespace App\Controller;
 
 
 use App\Entity\Articles;
+use App\Entity\Commentaires;
 use App\Form\AdminArticleType;
+use App\Form\CommentaireType;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -94,11 +96,39 @@ class ArticleController extends AbstractController
     public function readArticle(Articles $id)
     {
         $doctrine = $this->getDoctrine();
+        $entityManager = $doctrine->getManager();
         $userRepository = $doctrine->getRepository(Articles::class);
         $resultatArticle= $userRepository->find($id);
 
+        $userComment = new Commentaires();
+
+        $commentUser = $this->getUser();
+        $request = $this->get('request_stack')->getMasterRequest();
+
+        $form = $this->createForm(CommentaireType::class, $userComment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && !$form->isEmpty() && $form->isValid()) {
+
+            $userComment->setDatePost(new \DateTime()) ;
+            $userComment->setIdUtilisateur($commentUser);
+            $userComment->setIdArticle($id);
+            $userComment->setSignaler(0);
+            $entityManager->persist($userComment);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Le commentaire a bien été ajouté!');
+
+            return $this->redirectToRoute('article',
+                [   'id' => $id->getId(),
+                    '_fragment' => 'commentaires',
+                ]);
+
+        }
+
         return $this->render('home/article.html.twig', [
             'resultatArticle' => $resultatArticle,
+            'formAjoutcomment' => $form->createView(),
         ]);
     }
 
