@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Articles;
 use App\Form\AdminArticleType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -17,15 +18,23 @@ class ArticleController extends AbstractController
     /**
      * @Route("admin/articles", name="article_index")
      */
-    public function indexArticles()
+    public function indexArticles(Request $request, PaginatorInterface $paginator)
     {
         $doctrine = $this->getDoctrine();
 
         $articleRepository = $doctrine->getRepository(Articles::class);
         $resultatedit= $articleRepository->findAll();
 
-        return $this->render('admin/index_article.html.twig',
-            ['resultatedit' => $resultatedit ]);
+        $pagination = $paginator->paginate(
+            $resultatedit, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+
+        return $this->render('admin/index_article.html.twig', [
+            'resultatedit' => $resultatedit,
+            'pagination' => $pagination,
+        ]);
     }
 
     /**

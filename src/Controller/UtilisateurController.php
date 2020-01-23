@@ -8,6 +8,7 @@ use App\Entity\Utilisateur;
 use App\Form\newPasswordType;
 use App\Form\UtilisateurEditType;
 use App\Form\UtilisateurType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -20,14 +21,23 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("admin/user", name="user_index")
      */
-    public function index()
+    public function index(Request $request, PaginatorInterface $paginator)
     {
         $doctrine = $this->getDoctrine();
 
         $userRepository = $doctrine->getRepository(Utilisateur::class);
         $resultatedit= $userRepository->findAll();
 
-        return $this->render('admin/index_user.html.twig', ['resultatedit' => $resultatedit]);
+        $pagination = $paginator->paginate(
+            $resultatedit, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
+
+        return $this->render('admin/index_user.html.twig', [
+            'resultatedit' => $resultatedit,
+            'pagination' => $pagination,
+        ]);
     }
 
     /**

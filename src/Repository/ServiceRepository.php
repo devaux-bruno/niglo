@@ -9,7 +9,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 /**
  * @method Service|null find($id, $lockMode = null, $lockVersion = null)
  * @method Service|null findOneBy(array $criteria, array $orderBy = null)
- * @method Service[]    findAll()
  * @method Service[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ServiceRepository extends ServiceEntityRepository
@@ -28,6 +27,11 @@ class ServiceRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findAll()
+    {
+        return $this->findBy(array(), array('dateCreation' => 'DESC'));
     }
 
 }

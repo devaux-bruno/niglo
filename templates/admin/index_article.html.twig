@@ -18,7 +18,7 @@
                     <th width="250px">Action</th>
                 </tr>
                 <div id="accordion">
-                    {% for article in resultatedit %}
+                    {% for article in pagination %}
                         <tr>
                             <td class="middle">
                                 <a class="articleLienAdmin" target="_blank" href="{{ path('article',{'id' : article.id}) }}">

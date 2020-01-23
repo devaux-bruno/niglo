@@ -8,6 +8,7 @@ use App\Entity\Organisateur;
 use App\Entity\Service;
 use App\Form\AssociationType;
 use App\Form\ServiceType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,15 +19,23 @@ class ServiceController extends AbstractController
     /**
      * @Route("admin/service", name="service_index")
      */
-    public function indexLang()
+    public function indexService(Request $request, PaginatorInterface $paginator)
     {
         $doctrine = $this->getDoctrine();
 
         $langRepository = $doctrine->getRepository(Service::class);
         $resultatedit= $langRepository->findAll();
 
-        return $this->render('admin/index_service.html.twig',
-            ['resultatedit' => $resultatedit ]);
+        $pagination = $paginator->paginate(
+            $resultatedit, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            20 /*limit per page*/
+        );
+
+        return $this->render('admin/index_service.html.twig', [
+            'resultatedit' => $resultatedit,
+            'pagination' => $pagination,
+        ]);
     }
 
 

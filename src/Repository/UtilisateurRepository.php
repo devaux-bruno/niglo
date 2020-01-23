@@ -9,7 +9,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 /**
  * @method Utilisateur|null find($id, $lockMode = null, $lockVersion = null)
  * @method Utilisateur|null findOneBy(array $criteria, array $orderBy = null)
- * @method Utilisateur[]    findAll()
  * @method Utilisateur[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class UtilisateurRepository extends ServiceEntityRepository
@@ -47,4 +46,9 @@ class UtilisateurRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAll()
+    {
+        return $this->findBy(array(), array('dateInscription' => 'DESC'));
+    }
 }
