@@ -33,18 +33,13 @@ class Service extends AbstractController
      */
     private $publier;
 
-    /**
-     * @return mixed
-     */
+
     public function getPublier()
     {
         return $this->publier;
     }
 
-    /**
-     * @param mixed $publier
-     * @return Service
-     */
+
     public function setPublier($publier)
     {
         $this->publier = $publier;

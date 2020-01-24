@@ -5,7 +5,7 @@
     <h1 class="text-center mt-5 mb-3">Paramètres du site</h1>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 text-center">
                 {{ form_start(formAdminEdit) }}
                 <div class="my-custom-class-for-errors alert-danger">
                     {{ form_errors(formAdminEdit) }}
@@ -22,7 +22,24 @@
                         {{ form_end(formAdminEdit) }}
                     </div>
                 </div>
+            </div>
+            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 text-center">
+                {{ form_start(formAdminEdit1) }}
+                <div class="my-custom-class-for-errors alert-danger">
+                    {{ form_errors(formAdminEdit1) }}
+                    <span class="text-danger">{{ form_errors(formAdminEdit1.publier) }}</span>
+                </div>
+                <div class="row justify-content-center mt-2">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        {{ form_row(formAdminEdit1.publier) }}
+                    </div>
+                </div>
                 <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
+                        {{ form_rest(formAdminEdit1) }}
+                        {{ form_end(formAdminEdit1) }}
+                    </div>
+                <div class="row mt-2">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 justify-content-center">
                         <a class="btn btn-secondary mt-2" href="{{ path('home') }}">Retour</a>
                     </div>

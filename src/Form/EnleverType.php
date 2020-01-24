@@ -12,28 +12,28 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PublierType extends AbstractType
+class EnleverType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $formBuilder, array $options)
     {
         $formBuilder
             ->add('publier',EntityType::class, [
-                'label' => 'Afficher dans le menu :',
+                'label' => 'Enlever dans le menu :',
                 'class' => Service::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->andWhere('u.publier = :val')
-                        ->setParameter('val', 0);
-
+                        ->setParameter('val', 1);
                 },
                 'choice_label' => 'Titre',
+
                 'attr' => [
                     'class' => "form-control"
                 ],
                 'required'=> true,
             ])
             ->add('save', SubmitType::class ,[
-                'label' => 'Afficher',
+                'label' => 'Cacher',
                 'attr' => [
                     'class' => "btn btn-primary mt-3"
                 ],
