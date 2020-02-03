@@ -51,4 +51,15 @@ class ArticlesRepository extends ServiceEntityRepository
     {
         return $this->findBy(array(), array('datePublication' => 'DESC'));
     }
+
+    public function findArticleBySearch($term)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.titre LIKE :searchTerm OR p.texte LIKE :searchTerm OR p.descriptionCourte LIKE :searchTerm')
+            ->setParameter('searchTerm', '%'.$term.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 }

@@ -15,14 +15,11 @@
     <body>
     {% block nav %}
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow">
-        <h1 class="my-0 mr-md-auto font-weight-normal mt-2"><a href="{{ path('home') }}"><img src="{{ asset('asset/img/logo.gif') }}" alt="Niglo Camion"></a></h1>
-        <nav class="my-2 my-md-0 mr-md-3">
-            <ul class="languagesList row center">
-                {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
-            </ul>
-        </nav>
+        <a href="{{ path('home') }}"><img class="logoEduc" src="{{ asset('asset/img/logoeduc.jpg') }}" alt="Niglo Camion"></a>
+        <h1 class="my-0 mr-md-auto font-weight-normal mt-2">Anténne Scolaire Mobile</h1>
+        {{ render(controller('App\\Controller\\SearchController::baseSearch', {request : app.request})) }}
             {% if is_granted('ROLE_SUPERADMIN') %}
-
+            <ul>
                 <li class="nav-item-icon dropdown">
                     {% if app.user.photo is defined %}
                         <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/profil/') }}{{ app.user.photo }}" alt="image profil"></a>
@@ -62,7 +59,7 @@
                     {% if app.user.photo is defined %}
                         <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/profil/') }}{{ app.user.photo }}" alt="image profil"></a>
                     {% else %}
-                        <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNav" src="{{ asset('asset/img/user-cirle-regular.svg') }}" alt="image profil vide"></a>
+                        <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNoUser" src="{{ asset('asset/img/users-cog-solid.svg') }}" alt="image profil vide"></a>
                     {% endif %}
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <a class="dropdown-item" href="{{ path('profil_index') }}">Mon profil</a>
@@ -70,10 +67,25 @@
                     </div>
                 </li>
             {% else %}
-                <a class="btn btn-outline-dark mx-1" href="{{ path('app_login') }}">Connexion</a>
-                <a class="btn btn-outline-dark" href="{{ path('inscription') }}">Inscription</a>
+                <li class="nav-item-icon dropdown">
+                    <a class="nav-link-icon1 dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconNoUser" src="{{ asset('asset/img/users-cog-solid.svg') }}" alt="image profil vide"></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
+                        <a class="dropdown-item" href="{{ path('inscription') }}">Inscription</a>
+                    </div>
+                </li>
             {% endif %}
+            </ul>
     </div>
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <nav class="my-2 my-md-0 mr-md-3">
+                    <ul class="languagesList row center">
+                        {{ render(controller('App\\Controller\\BaseController::baseRender')) }}
+                    </ul>
+                </nav>
+            </div>
+        </div>
     {% endblock %}
     {% for message in app.flashes('success') %}
         <div class="container">

@@ -268,6 +268,28 @@ class ArticleController extends AbstractController
 
 
     /**
+     * @Route("search/{dataSearch}", name="article_search" , methods={"GET","POST"})
+     */
+    public function testSearch($dataSearch, Request $request, PaginatorInterface $paginator)
+    {
+
+        $doctrine = $this->getDoctrine();
+        $articleRepository = $doctrine->getRepository(Articles::class);
+        $resultatsearch= $articleRepository->findArticleBySearch($dataSearch);
+
+        $pagination = $paginator->paginate(
+            $resultatsearch, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            8 /*limit per page*/
+        );
+
+        return $this->render('home/index_search.html.twig', [
+            'pagination' => $pagination,
+            'dataSearch' => $dataSearch,
+        ]);
+    }
+
+    /**
      * @return string
      */
     private function generateUniqueFileName()

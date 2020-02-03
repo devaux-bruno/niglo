@@ -4,19 +4,25 @@
 .bd-placeholder-img {font-size: 1.125rem; text-anchor: middle; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
 svg{height: 50px;}
 .nav-item-icon{list-style: none}
-.dropdown-menu{transform: translate3d(-125px, 80px, 0px) !important;}
+.dropdown-menu{ top: 5px !important;left: -75px !important;}
 td{vertical-align: middle !important;}
 input[type=checkbox]{margin-left: 55px;margin-right: 5px;}
+h1{ font-family: Helvetica, Arial, sans-serif; font-weight: bold; font-size: 30px; margin-left:30px;}
+form[name="search"]{padding-right: 40px; display: inline-flex;}
 
 /************************************************************
 *******************     Navigation     **********************
 *************************************************************/
-.iconNav {height: 80px;}
+.iconNoUser {height: 35px;}
+.iconNav {height: 50px;}
 .shadow{box-shadow: 0 .85rem .5rem rgba(255,115,50,.075)!important;}
 .languagesList{list-style: none; display: inline-flex;padding-inline-start: 10px; }
 .languagesList li{ border-right: 1px solid black; padding-left: 10px}
 .languagesList li a{margin-right: 10px}
 .languagesList li:last-child{ border-right:none}
+.logoEduc{width: 170px;}
+.btnSearch{background-image: url('../img/search-solid.svg');background-repeat: no-repeat; background-position: center ;background-size: 29px;}
+button[id="search_save"]{width: 35px; height: 37px; margin-left: 5px;}
 
 /************************************************************
 *******************        Profil      **********************
