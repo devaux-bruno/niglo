@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="text-center mt-5 mb-3">Gestion des Partenaires</h2>
+    <div class="container-fluid text-center">
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ path('partenaire_add') }}">Ajouter un Service</a>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table my-5">
+                <tr>
+                    <th>Numéro Id</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Date d'enregistrement</th>
+                    <th>Photo</th>
+                    <th class="tabAcion">Action</th>
+                </tr>
+                <div id="accordion mb-3">
+                    {% for lang in pagination %}
+                        <tr>
+                            <td>{{ lang.id }}</td>
+                            <td>{{ lang.nom }}</td>
+                            <td>{{ lang.description|striptags|slice(0, 200)|raw }} ...
+                            <br>
+                            <button class="btn btn-success btnPartenaire">Voir Partenaire</button>
+                            </td>
+                            <div class="row apercuPartenaire displayNone">
+                                <div class="col-12">
+                                    <button type="button" class="fermer float-right"><img class="btnFermer" src="{{ asset('asset/img/times-solid.svg') }}" alt="fermer"></button>
+                                </div>
+                                <div class="col-12">
+                                    <img class="AdminImgArticle" src="{{ asset('asset/img/profil/') }}{{ lang.photo }}" alt="image partenaire">
+                                </div>
+                                <div class="col-12 text-center">
+                                    <h3 class="apercuH3">{{ lang.nom }}</h3>
+                                </div>
+                                <div class="col-12">
+                                    <span id="texte">{{ lang.description|raw }}</span>
+                                </div>
+                            </div>
+                            <td>{{ lang.dateAjout|date('d/m/Y H:m') }}</td>
+                            <td><img class="AdminImgArticle" src="{{ asset('asset/img/profil/') }}{{ lang.photo }}" alt="image partenaire"></td>
+                            <td>
+                                <a class="btn btn-primary"
+                                   href="{{ path('partenaire_edit', {'id' : lang.id}) }}">
+                                    Modifier
+                                </a>
+                                <a class="btn btn-danger"
+                                   href="{{ path('partenaire_delete', {'id' : lang.id}) }}">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </div>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+            $( ".btnPartenaire" ).click(function() {
+                $(".apercuPartenaire").removeClass('displayNone');
+            });
+            $( ".fermer" ).click(function() {
+                $(this).parents(".apercuPartenaire").addClass('displayNone');
+            });
+
+    </script>
+{% endblock %}

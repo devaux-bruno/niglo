@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Partenaire;
 use App\Entity\Service;
 use App\Form\EnleverType;
 use App\Form\PublierType;
@@ -23,6 +24,19 @@ class BaseController extends AbstractController
 
 
         return $this->render('home/service_list.html.twig', [
+            'resultatshow' => $resultatedit,
+        ]);
+    }
+
+    public function partenaireRender()
+    {
+        $doctrine = $this->getDoctrine();
+
+        $languagesRepository = $doctrine->getRepository(Partenaire::class);
+        $resultatedit= $languagesRepository->findPublier();
+
+
+        return $this->render('home/partenaire_list.html.twig', [
             'resultatshow' => $resultatedit,
         ]);
     }

@@ -7,17 +7,21 @@ svg{height: 50px;}
 .dropdown-menu{ top: 5px !important;left: -75px !important;}
 td{vertical-align: middle !important;}
 input[type=checkbox]{margin-left: 55px;margin-right: 5px;}
-h1{ font-family: Helvetica, Arial, sans-serif; font-weight: bold; font-size: 30px; margin-left:30px;}
+body{ font-family: Helvetica, Arial, sans-serif;}
+h1{font-weight: bold; font-size: 30px; margin-left:30px;}
+h2{ font-size: 22px; margin-right:10px;}
 form[name="search"]{padding-right: 40px; display: inline-flex;}
+.width{width: 100%}
+
+
 
 /************************************************************
 *******************     Navigation     **********************
 *************************************************************/
 .iconNoUser {height: 35px;}
 .iconNav {height: 50px;}
-.shadow{box-shadow: 0 .85rem .5rem rgba(255,115,50,.075)!important;}
 .languagesList{list-style: none; display: inline-flex;padding-inline-start: 10px; }
-.languagesList li{ border-right: 1px solid black; padding-left: 10px}
+.languagesList li{ border-right: 1px solid black; padding-left: 10px;height: 30px;}
 .languagesList li a{margin-right: 10px}
 .languagesList li:last-child{ border-right:none}
 .logoEduc{width: 170px;}
@@ -97,6 +101,18 @@ table tr, table th{ border-bottom: 1px solid #293133;}
 .signaledcomment{text-align: left; display: block; color: red;left: 20px; position: relative;}
 .signaledcomment:hover{color: tomato; text-decoration: none}
 .datecomment{text-align: end;}
+
+/************************************************************
+*******************     Apercu     **********************
+*************************************************************/
+.apercuPartenaire{text-align: center; background-color: rgba(0,0,0,0.8); width:80vw; position: fixed;z-index: 999; top: 5vh;  left: 10vw;}
+.btnFermer{width: 20px}
+.fermer{margin-top: 10px}
+.displayNone{display: none}
+#texte{ color: white; text-align: initial;}
+.apercuH3{color: #FFFFFF}
+
+
 
 
 /****************************************************************************************************************************

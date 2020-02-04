@@ -14,7 +14,7 @@
     </head>
     <body>
     {% block nav %}
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white">
         <a href="{{ path('home') }}"><img class="logoEduc" src="{{ asset('asset/img/logoeduc.jpg') }}" alt="Niglo Camion"></a>
         <h1 class="my-0 mr-md-auto font-weight-normal mt-2">Anténne Scolaire Mobile</h1>
         {{ render(controller('App\\Controller\\SearchController::baseSearch', {request : app.request})) }}
@@ -31,6 +31,7 @@
                         <a class="dropdown-item" href="{{ path('article_add') }}">Écrire un Article</a>
                         <a class="dropdown-item" href="{{ path('user_index') }}">Gestion des Membres</a>
                         <a class="dropdown-item" href="{{ path('article_index') }}">Gestion des Articles</a>
+                        <a class="dropdown-item" href="{{ path('partenaire_index') }}">Gestion des Partenaires</a>
                         <a class="dropdown-item" href="{{ path('service_index') }}">Gestion des Services</a>
                         <a class="dropdown-item" href="{{ path('commentaire_index') }}">Gestion des Commentaires</a>
                         <a class="dropdown-item" href="{{ path('setting') }}">Paramètres</a>
@@ -51,6 +52,7 @@
                             <a class="dropdown-item" href="{{ path('user_index') }}">Gestion des Membres</a>
                             <a class="dropdown-item" href="{{ path('service_index') }}">Gestion des Services</a>
                             <a class="dropdown-item" href="{{ path('commentaire_index') }}">Gestion des Commentaires</a>
+                            <a class="dropdown-item" href="{{ path('partenaire_index') }}">Gestion des Partenaires</a>
                             <a class="dropdown-item" href="{{ path('app_logout') }}">Deconnexion</a>
                         </div>
                     </li>
@@ -77,7 +79,7 @@
             {% endif %}
             </ul>
     </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-middle width">
             <div class="col-12 text-center">
                 <nav class="my-2 my-md-0 mr-md-3">
                     <ul class="languagesList row center">
@@ -106,6 +108,15 @@
         {% endblock %}
     {% block footer %}
         <footer class="mt-5 border-top">
+            <div class="row justify-content-center align-middle width">
+                <div class="col-12 text-center">
+                    <nav class="my-2 my-md-0 mr-md-3">
+                        <ul class="languagesList row center">
+                            {{ render(controller('App\\Controller\\BaseController::partenaireRender')) }}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
             <div class="row justify-content-center mt-3 footer">
                 <div class="col-12 col-sm-12 col-md-4 justify-content-center mt-3 mb-4">
                     <p class="contact">
