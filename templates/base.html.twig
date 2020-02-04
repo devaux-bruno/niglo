@@ -103,20 +103,27 @@
             </div>
         </div>
     {% endfor %}
-        {% block body %}
 
-        {% endblock %}
+    {% block body %}
+    {% endblock %}
+
+    {% block partenaire %}
+        <div class="row justify-content-center align-middle width mt-3 mb-3">
+            <div class="col-12 text-center">
+                <h3>Nos partenaires</h3>
+            </div>
+            <div class="col-12 text-center imgPartenaire">
+                <nav class="my-2 my-md-0 mr-md-3">
+                    <ul class="languagesList row center">
+                        {{ render(controller('App\\Controller\\BaseController::partenaireRender')) }}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    {% endblock %}
+
     {% block footer %}
         <footer class="mt-5 border-top">
-            <div class="row justify-content-center align-middle width">
-                <div class="col-12 text-center">
-                    <nav class="my-2 my-md-0 mr-md-3">
-                        <ul class="languagesList row center">
-                            {{ render(controller('App\\Controller\\BaseController::partenaireRender')) }}
-                        </ul>
-                    </nav>
-                </div>
-            </div>
             <div class="row justify-content-center mt-3 footer">
                 <div class="col-12 col-sm-12 col-md-4 justify-content-center mt-3 mb-4">
                     <p class="contact">

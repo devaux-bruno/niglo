@@ -9,7 +9,8 @@ td{vertical-align: middle !important;}
 input[type=checkbox]{margin-left: 55px;margin-right: 5px;}
 body{ font-family: Helvetica, Arial, sans-serif;}
 h1{font-weight: bold; font-size: 30px; margin-left:30px;}
-h2{ font-size: 22px; margin-right:10px;}
+h2{ font-size: 22px; margin-right:10px; font-weight: bold}
+h3{ font-size: 18px;}
 form[name="search"]{padding-right: 40px; display: inline-flex;}
 .width{width: 100%}
 
@@ -52,7 +53,7 @@ button[id="search_save"]{width: 35px; height: 37px; margin-left: 5px;}
 .gridCenter{display: grid; text-align: center}
 .footer{width: 100%;}
 .border-top {box-shadow: -0 -0.85rem 0.5rem rgba(255,115,50,.075)!important; -moz-border-radius-topleft: 25px;-moz-border-radius-topright: 25px}
-
+.imgPartenaire{  height: 80px;}
 
 /************************************************************
 *******************    Page admin      **********************
