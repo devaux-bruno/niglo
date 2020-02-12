@@ -31,15 +31,24 @@ class NewsletterController extends AbstractController
 
             $dataSearch = $form['email']->getData();
 
-            $news->setEmail($dataSearch);
-            $news->setDateRegistre(new \DateTime());
-            $news->setActive(1);
-            $news->setIdUtilisateur($user);
-            $entityManager->persist($news);
-            $entityManager->flush();
+            $newsletterRepository = $doctrine->getRepository(Newsletter::class);
+            $emailsNews= $newsletterRepository->findOneBy(['email'=>$dataSearch]);
 
-            $this->addFlash('success', 'Merci pour votre inscription et votre soutien!');
-            return $this->redirectToRoute('home',[]);
+            if(!$emailsNews){
+                $news->setEmail($dataSearch);
+                $news->setDateRegistre(new \DateTime());
+                $news->setActive(1);
+                $news->setIdUtilisateur($user);
+                $entityManager->persist($news);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Merci pour votre inscription et votre soutien!');
+                return $this->redirectToRoute('home',[]);
+            }else{
+                $this->addFlash('error', 'Cet email est déjà inscrit à notre newsletter!');
+                return $this->redirectToRoute('home',[]);
+            }
+
 
         }
 

@@ -24,7 +24,7 @@ class Newsletter extends AbstractController
     /**
      * @var Utilisateur
      *
-     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="NewsletterArticle")
+     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="UtilisateurNewsletter")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_user" , referencedColumnName="id")
      * })

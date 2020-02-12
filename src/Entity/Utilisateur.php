@@ -170,9 +170,23 @@ class Utilisateur implements UserInterface
     private $UtilisateurArticle;
 
     /**
-     * @ORM\OneToMany(targetEntity="Articles", mappedBy="idUtilisateur")
+     * @ORM\OneToMany(targetEntity="Newsletter", mappedBy="idUtilisateur")
      */
     private $UtilisateurNewsletter;
+
+    /**
+     * @return mixed
+     */
+    public function getUtilisateurNewsletter()
+    {
+        return $this->UtilisateurNewsletter;
+    }
+
+    public function setUtilisateurNewsletter($UtilisateurNewsletter)
+    {
+        $this->UtilisateurNewsletter = $UtilisateurNewsletter;
+        return $this;
+    }
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commentaires", mappedBy="idUtilisateur")
