@@ -15,11 +15,11 @@
     <body>
     {% block nav %}
     <header class="header">
-        <div class="row justify-content-center align-middle">
+        <div class="row justify-content-center align-middle bg-white">
             <a class="mt-2" target="_blank" href="#"><img class="logoSociauxnav" alt="logo Tweeter" src="{{ asset('asset/img/instagram-brands.svg') }}"></a>
             <a class="mt-2" target="_blank" href="#"><img class="logoSociauxnav" alt="logo Facebook" src="{{ asset('asset/img/facebook-square-brands.svg') }}"></a>
             <a class="mt-2" target="_blank" href="#"><img class="logoSociauxnav" alt="logo Instagram" src="{{ asset('asset/img/twitter-square-brands.svg') }}"></a>
-                <button class="btn btnNewsletter"><img class="logoSociauxnav" alt="logo newsletter" src="{{ asset('asset/img/paper-plane-regular.svg') }}"> S'inscrire à la newsletter</button> 
+                <button class="btn btnNewsletter"><img class="logoSociauxnav" alt="logo newsletter" src="{{ asset('asset/img/paper-plane-regular.svg') }}"> S'inscrire à la newsletter</button>
         </div>
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white">
             <div class="col-3">
@@ -28,7 +28,9 @@
                     <h1 class="my-0 mr-md-auto font-weight-normal mt-2">Anténne Scolaire Mobile</h1>
                 </a>
             </div>
-            <div class="col-6"></div>
+            <div class="col-6">
+                <img class="logoNiglo" src="{{ asset('asset/img/niglo.png') }}" alt="logo niglo">
+            </div>
             <div class="col-3">
                 <div class="search">
                     <button class="btn btn-primary btnSearch"></button>
@@ -96,7 +98,7 @@
                 </ul>
             </div>
         </div>
-        <div class="row justify-content-center align-middle width">
+        <div class="row justify-content-center align-middle width bg-white">
             <div class="col-12 text-center">
                 <nav class="my-2 my-md-0 mr-md-3">
                     <ul class="languagesList row center">
@@ -134,7 +136,7 @@
     {% endblock %}
 
     {% block partenaire %}
-        <div class="row justify-content-center align-middle width mt-3 mb-3">
+        <div class="row justify-content-center align-middle width mt-4 mb-4">
             <div class="col-12 text-center">
                 <h3>Nos partenaires</h3>
             </div>
@@ -149,7 +151,10 @@
     {% endblock %}
 
     {% block footer %}
-        <footer class="mt-5 border-top">
+        <footer class="mt-5">
+            <div class="drapeau">
+                <img class="frFlag" src="{{ asset('asset/img/test.png') }}" alt="drapeau francais">
+            </div>
             <div class="row justify-content-center mt-3 footer">
                 <div class="col-12 col-sm-12 col-md-4 justify-content-center mt-3 mb-4">
                     <p class="contact">
